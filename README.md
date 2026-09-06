@@ -18,6 +18,7 @@ This repository imports the design as published and then applies fixes on top, s
 | `fonts/` | The label typeface, vendored so no system font install is needed |
 | `build.sh` | Exports box and lid STLs per tray |
 | `scripts/check-font.sh` | Guards against OpenSCAD silently substituting the label font |
+| `scripts/check-mesh.sh` | Guards against exporting a mesh slicers will reject |
 | `scripts/make-font-instance.py` | Regenerates the vendored font instance |
 
 ## Trays
@@ -120,6 +121,16 @@ renaming is permitted but not required.)
 pip install fonttools
 python3 scripts/make-font-instance.py 450
 ```
+
+### Mesh validation
+
+`build.sh` also runs `scripts/check-mesh.sh` on every STL it writes, verifying that each edge is
+shared by exactly two triangles. OpenSCAD's own manifold report is not sufficient — its internal
+representation can be valid while the exported triangle soup still pinches. That is not
+hypothetical: the *Expansion* label's plaque boundary originally landed exactly tangent to a lid
+perforation, producing a single edge shared by four triangles, which Bambu Studio rejected as a
+non-manifold edge. Such a tangency is a knife edge — every perturbation tried resolved it — so
+that lid sets `LID_LABELS_BG_THICKNESS` to 2.2 instead of the default 2.0.
 
 Because a missing font produces **no warning at all**, `build.sh` runs `scripts/check-font.sh`
 before rendering. It draws a probe string twice — once with the real font name, once with a name

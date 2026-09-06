@@ -399,6 +399,10 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					// The default plaque margin (2.0) puts this label's frame exactly tangent to a
+					// lid perforation, pinching the mesh into a non-manifold edge that slicers
+					// reject. 2.2 moves the boundary off the tangency. See scripts/check-mesh.sh.
+					[ LID_LABELS_BG_THICKNESS,      2.2 ],
 					[ LABEL,
 						[
 							[ LBL_TEXT,     "Expansion" ],

@@ -76,6 +76,10 @@ render() {
     echo "error: $outfile was not produced" >&2
     exit 1
   fi
+
+  # A valid OpenSCAD model can still export a pinched triangle soup, which
+  # slicers reject. Catch it here rather than on the print bed.
+  ./scripts/check-mesh.sh "$outfile" >/dev/null
 }
 
 OSCAD="$(find_openscad)"
