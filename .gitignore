@@ -1,0 +1,4 @@
+build/
+*.stl
+*.csg
+*.png

@@ -1,0 +1,5 @@
+# The upstream .scad files use CRLF. Normalize to LF in the repository so that
+# diffs stay reviewable regardless of a contributor's core.autocrlf setting.
+*.scad text
+*.md   text
+*.sh   text eol=lf
