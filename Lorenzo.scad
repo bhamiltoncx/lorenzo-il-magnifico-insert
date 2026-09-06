@@ -374,7 +374,7 @@ data =
             [ BOX_COMPONENT,									//Family Tiles, 2 stacks of 6
                 [
 					[ ENABLED_B, t ],
-                    [ CMP_COMPARTMENT_SIZE_XYZ,  [ 57, 66.5, 13] ],
+                    [ CMP_COMPARTMENT_SIZE_XYZ,  [ 58.5, 68.5, 13] ],
                     [ CMP_NUM_COMPARTMENTS_XY,   [ 2, 1] ],
 					[ POSITION_XY,               [ 68, 1 ]],
 					[ CMP_SHAPE, SQUARE ],
@@ -396,9 +396,9 @@ data =
             [ BOX_COMPONENT,									//3 Faith Tiles, 2 Excomm tiles, 2 Dev cards
                 [
 					[ ENABLED_B, t ],
-                    [ CMP_COMPARTMENT_SIZE_XYZ,  [ 89, 46, 14] ],
+                    [ CMP_COMPARTMENT_SIZE_XYZ,  [ 89, 45, 14] ],
                     [ CMP_NUM_COMPARTMENTS_XY,   [1,1] ],
-					[ POSITION_XY,               [ 68, 68.5 ]],
+					[ POSITION_XY,               [ 68, 70.5 ]],
 					[ CMP_SHAPE, SQUARE ],
                 ]
             ],
@@ -407,7 +407,7 @@ data =
 					[ ENABLED_B, t ],
                     [ CMP_COMPARTMENT_SIZE_XYZ,  [ 25, 35, 16] ],
                     [ CMP_NUM_COMPARTMENTS_XY,   [ 1, 1] ],
-					[ POSITION_XY,               [ 158, 68.5 ]],
+					[ POSITION_XY,               [ 158, 70.5 ]],
 					[ CMP_SHAPE, FILLET ],
 					[ CMP_FILLET_RADIUS, 7.5 ],
 					[ CMP_SHAPE_ROTATED_B, t],
