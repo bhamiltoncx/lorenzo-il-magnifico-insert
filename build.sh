@@ -78,6 +78,11 @@ render() {
 
 OSCAD="$(find_openscad)"
 
+# Labels use a vendored font. OpenSCAD substitutes a default face for an
+# unresolved font name without warning, so verify before spending minutes
+# rendering lids that would silently carry the wrong typeface.
+./scripts/check-font.sh "$OSCAD"
+
 case "${1:-}" in
   --list) list_trays; exit 0 ;;
   --all)  IFS=$'\n' read -r -d '' -a TRAYS < <(list_trays && printf '\0') ;;

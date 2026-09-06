@@ -3,3 +3,6 @@
 *.scad text
 *.md   text
 *.sh   text eol=lf
+
+# Never apply line-ending normalization to font binaries.
+*.ttf binary

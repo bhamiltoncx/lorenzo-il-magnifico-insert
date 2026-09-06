@@ -1,4 +1,5 @@
 include <boardgame_insert_toolkit_lib.2.scad>;
+use <fonts/EBGaramondInsert-Italic-450.ttf>;
 
 // determines whether lids are output.
 g_b_print_lid = true;
@@ -50,6 +51,13 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LABEL,
+						[
+							[ LBL_TEXT,     "Development Cards" ],
+							[ LBL_SIZE,     AUTO ],
+							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
+						]
+					],
                 ]
             ],
             [ BOX_COMPONENT,								// Uses built-in dividers
@@ -82,6 +90,13 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LABEL,
+						[
+							[ LBL_TEXT,     "Player Tokens" ],
+							[ LBL_SIZE,     AUTO ],
+							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
+						]
+					],
                 ]
             ],
             [ BOX_COMPONENT,
@@ -111,6 +126,13 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LABEL,
+						[
+							[ LBL_TEXT,     "Resources" ],
+							[ LBL_SIZE,     AUTO ],
+							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
+						]
+					],
                 ]
             ],
             [ BOX_COMPONENT,									//Stone and Wood, small
@@ -175,6 +197,13 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LABEL,
+						[
+							[ LBL_TEXT,     "Coins" ],
+							[ LBL_SIZE,     AUTO ],
+							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
+						]
+					],
                 ]
             ],
             [ BOX_COMPONENT,									//1-Coins and 5-Coins
@@ -207,6 +236,13 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LABEL,
+						[
+							[ LBL_TEXT,     "Main Bits" ],
+							[ LBL_SIZE,     AUTO ],
+							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
+						]
+					],
                 ]
             ],
             [ BOX_COMPONENT,									//Leader Cards
@@ -305,6 +341,13 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LABEL,
+						[
+							[ LBL_TEXT,     "Special Tokens" ],
+							[ LBL_SIZE,     AUTO ],
+							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
+						]
+					],
                 ]
             ],
             [ BOX_COMPONENT,									//6 stacks Special tokens
@@ -356,6 +399,13 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LABEL,
+						[
+							[ LBL_TEXT,     "Expansion" ],
+							[ LBL_SIZE,     AUTO ],
+							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
+						]
+					],
                 ]
             ],
             [ BOX_COMPONENT,									//Auction Tiles and 4) Expansion Leader Cards
@@ -447,6 +497,13 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LABEL,
+						[
+							[ LBL_TEXT,     "Special Cards" ],
+							[ LBL_SIZE,     AUTO ],
+							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
+						]
+					],
                 ]
             ],
             [ BOX_COMPONENT,									//Special Development Cards

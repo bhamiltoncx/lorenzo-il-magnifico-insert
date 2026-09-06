@@ -15,6 +15,10 @@ This repository imports the design as published and then applies fixes on top, s
 |---|---|
 | `Lorenzo.scad` | The insert design — all trays are defined in the `data` array |
 | `boardgame_insert_toolkit_lib.2.scad` | BIT library v2.45, vendored so the design renders standalone |
+| `fonts/` | The label typeface, vendored so no system font install is needed |
+| `build.sh` | Exports box and lid STLs per tray |
+| `scripts/check-font.sh` | Guards against OpenSCAD silently substituting the label font |
+| `scripts/make-font-instance.py` | Regenerates the vendored font instance |
 
 ## Trays
 
@@ -60,6 +64,71 @@ BOX='Expansion V3: Auction Tiles, Family Tiles, Brown Pawn, Faith (no tokens)'
 
 `g_isolated_print_box` looks the tray up by its exact name and renders it directly, bypassing
 the `ENABLED_B` check — so a tray marked disabled will still export.
+
+## Lid labels
+
+Every lid carries its contents name on a raised plaque, set in **EB Garamond Italic** — chosen
+because it closely matches the calligraphic lettering on the game's own cover.
+
+| Tray | Label |
+|---|---|
+| Development Cards | *Development Cards* |
+| Player Tokens - 1p | *Player Tokens* |
+| Resource Tokens - 2 boxes | *Resources* |
+| Coins - 2 trays | *Coins* |
+| v3 flat layer — Main Bits… | *Main Bits* |
+| Special Tokens, Visconti Tokens | *Special Tokens* |
+| Expansion V3… | *Expansion* |
+| Special Development Cards… | *Special Cards* |
+
+Labels are declared as a `LABEL` block inside each tray's `BOX_LID`:
+
+```openscad
+[ LABEL,
+    [
+        [ LBL_TEXT,     "Expansion" ],
+        [ LBL_SIZE,     AUTO ],
+        [ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
+    ]
+],
+```
+
+`LBL_SIZE, AUTO` scales the text to the lid, capped at 100 mm wide. On a perforated lid the
+library automatically builds a solid plaque behind the lettering — border, 45° striped infill,
+raised text on top.
+
+### Which way up
+
+BIT mirrors lid labels — `MakeLidLabel` applies `MirrorAboutPoint([1,0,0])`, identically in
+v2 and v4 — because the lid is emitted flipped relative to how it sits on the box. The label is
+extruded through the full lid thickness, so it is legible from either face, but reads the right
+way round from only one. Viewed from +Z in the exported STL it appears mirrored; seat the lid
+with the readable face up. The lid's profile is symmetric in Z (a full-width flange at both
+faces with an inset body between), so neither orientation affects the print.
+
+### About the font
+
+Google ships EB Garamond as a **variable** font, and OpenSCAD 2021.01 cannot select a variable
+axis at render time. Asking for `EB Garamond:style=Bold` does not fail — it silently returns a
+synthesized face that is not EB Garamond at all. So the weight is pinned ahead of time:
+`scripts/make-font-instance.py` bakes a static instance at weight 450 and renames the family to
+`EB Garamond Insert`, both to disambiguate it from any system-installed EB Garamond and because
+a 450-weight instance is not stock EB Garamond. (EB Garamond carries no Reserved Font Name, so
+renaming is permitted but not required.)
+
+```bash
+pip install fonttools
+python3 scripts/make-font-instance.py 450
+```
+
+Because a missing font produces **no warning at all**, `build.sh` runs `scripts/check-font.sh`
+before rendering. It draws a probe string twice — once with the real font name, once with a name
+guaranteed not to exist — and fails if the two come out identical, which is what happens when
+OpenSCAD has quietly fallen back.
+
+Weight 450 keeps the finest strokes near 0.5 mm, which prints as a single extrusion on a 0.4 mm
+nozzle. Lighter script faces were considered and rejected: Tangerine's hairlines fall well under
+one extrusion width and print broken or fuzzy.
 
 ## Family tile compartment fix
 
