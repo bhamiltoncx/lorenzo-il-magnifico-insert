@@ -1,4 +1,34 @@
+# Build output
 build/
 *.stl
 *.csg
 *.png
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Emacs
+*~
+\#*\#
+.\#*
+*.elc
+auto-save-list/
+tramp
+
+# vi / vim / neovim
+*.swp
+*.swo
+*.sw[a-p]
+.netrwhist
+Session.vim
+tags
+
+# Editors, generally
+*.bak
+*.orig
+.idea/
+.vscode/
