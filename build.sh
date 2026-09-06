@@ -68,7 +68,9 @@ render() {
     -D "g_isolated_print_box=\"$tray\"" \
     -D "g_b_print_box=$print_box" \
     -D "g_b_print_lid=$print_lid" \
-    "$SCAD_FILE" 2>&1 | grep -iE '^ERROR|WARNING' || true
+    "$SCAD_FILE" 2>&1 \
+    | grep -iE '^ERROR|WARNING' \
+    | grep -v 'Fontconfig warning' || true
 
   if [[ ! -s "$outfile" ]]; then
     echo "error: $outfile was not produced" >&2
