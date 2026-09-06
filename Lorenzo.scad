@@ -51,10 +51,17 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LID_STRIPE_WIDTH,          1.2 ],
+					[ LID_STRIPE_SPACE,          0.8 ],
+					// This lid is only 26mm deep. The plaque grows by 2*bg per side (the library
+					// offsets the text inside the bounding hull and again outside it), so the
+					// default 2.0 buries the border in the lid wall; 1.0 keeps it visible.
+					[ LID_LABELS_BG_THICKNESS,   1.0 ],
+					[ LID_LABELS_BORDER_THICKNESS, 0.5 ],
 					[ LABEL,
 						[
 							[ LBL_TEXT,     "Development Cards" ],
-							[ LBL_SIZE,     AUTO ],
+							[ LBL_SIZE,     13 ],
 							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
 						]
 					],
@@ -90,10 +97,22 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LID_STRIPE_WIDTH,          1.2 ],
+					[ LID_STRIPE_SPACE,          0.8 ],
+					[ LID_LABELS_BORDER_THICKNESS, 0.5 ],
 					[ LABEL,
 						[
-							[ LBL_TEXT,     "Player Tokens" ],
-							[ LBL_SIZE,     AUTO ],
+							[ LBL_TEXT,     "Player" ],
+							[ LBL_SIZE,     12 ],
+							[ POSITION_XY,  [ 0, 9 ] ],
+							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
+						]
+					],
+					[ LABEL,
+						[
+							[ LBL_TEXT,     "Tokens" ],
+							[ LBL_SIZE,     12 ],
+							[ POSITION_XY,  [ 0, -11.3 ] ],
 							[ LBL_FONT,     "EB Garamond Insert:style=Italic" ],
 						]
 					],
@@ -126,6 +145,9 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LID_STRIPE_WIDTH,          1.2 ],
+					[ LID_STRIPE_SPACE,          0.8 ],
+					[ LID_LABELS_BORDER_THICKNESS, 0.5 ],
 					[ LABEL,
 						[
 							[ LBL_TEXT,     "Resources" ],
@@ -197,6 +219,9 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LID_STRIPE_WIDTH,          1.2 ],
+					[ LID_STRIPE_SPACE,          0.8 ],
+					[ LID_LABELS_BORDER_THICKNESS, 0.5 ],
 					[ LABEL,
 						[
 							[ LBL_TEXT,     "Coins" ],
@@ -236,6 +261,9 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LID_STRIPE_WIDTH,          1.2 ],
+					[ LID_STRIPE_SPACE,          0.8 ],
+					[ LID_LABELS_BORDER_THICKNESS, 0.5 ],
 					[ LABEL,
 						[
 							[ LBL_TEXT,     "Main Bits" ],
@@ -341,6 +369,13 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LID_STRIPE_WIDTH,          1.2 ],
+					[ LID_STRIPE_SPACE,          0.8 ],
+					// This lid is only 26mm deep. The plaque grows by 2*bg per side (the library
+					// offsets the text inside the bounding hull and again outside it), so the
+					// default 2.0 buries the border in the lid wall; 1.0 keeps it visible.
+					[ LID_LABELS_BG_THICKNESS,   1.0 ],
+					[ LID_LABELS_BORDER_THICKNESS, 0.5 ],
 					[ LABEL,
 						[
 							[ LBL_TEXT,     "Special Tokens" ],
@@ -399,6 +434,12 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LID_STRIPE_WIDTH,          1.2 ],
+					[ LID_STRIPE_SPACE,          0.8 ],
+					// 0.5 puts this lid's inner frame edge exactly tangent to a perforation,
+					// pinching the mesh into a non-manifold edge at (42.64, 193.36). 0.6 clears
+					// it; so does 0.4. Verified deterministic. See scripts/check-mesh.sh.
+					[ LID_LABELS_BORDER_THICKNESS, 0.6 ],
 					// The default plaque margin (2.0) puts this label's frame exactly tangent to a
 					// lid perforation, pinching the mesh into a non-manifold edge that slicers
 					// reject. 2.2 moves the boundary off the tangency. See scripts/check-mesh.sh.
@@ -501,6 +542,9 @@ data =
 					[ LID_PATTERN_ROW_OFFSET,       10 ],
 					[ LID_PATTERN_COL_OFFSET,       130 ],
 					[ LID_PATTERN_THICKNESS,        .6	 ],
+					[ LID_STRIPE_WIDTH,          1.2 ],
+					[ LID_STRIPE_SPACE,          0.8 ],
+					[ LID_LABELS_BORDER_THICKNESS, 0.5 ],
 					[ LABEL,
 						[
 							[ LBL_TEXT,     "Special Cards" ],

@@ -74,7 +74,7 @@ because it closely matches the calligraphic lettering on the game's own cover.
 | Tray | Label |
 |---|---|
 | Development Cards | *Development Cards* |
-| Player Tokens - 1p | *Player Tokens* |
+| Player Tokens - 1p | *Player* / *Tokens* (two lines) |
 | Resource Tokens - 2 boxes | *Resources* |
 | Coins - 2 trays | *Coins* |
 | v3 flat layer — Main Bits… | *Main Bits* |
@@ -94,9 +94,42 @@ Labels are declared as a `LABEL` block inside each tray's `BOX_LID`:
 ],
 ```
 
-`LBL_SIZE, AUTO` scales the text to the lid, capped at 100 mm wide. On a perforated lid the
-library automatically builds a solid plaque behind the lettering — border, 45° striped infill,
-raised text on top.
+On a perforated lid the library automatically builds a plaque behind the lettering — border,
+45° striped infill, raised text on top.
+
+`LBL_SIZE, AUTO` scales the text to the lid but is **capped at 100 mm wide** regardless of how
+long the lid is (`min(100, auto_width)`), so on the 190 mm lids it leaves size on the table. An
+explicit `LBL_SIZE` bypasses the resize entirely and renders at that size directly — at size 10
+this font sets *Development Cards* 104.35 mm wide by 13.82 mm tall, and scales linearly.
+
+### Sizing for a 0.4 mm nozzle
+
+EB Garamond is a high-contrast old-style face: its hairlines are a fraction of its stem width.
+At `AUTO` sizing several labels put more than half their ink below one 0.42 mm extrusion, which
+prints as torn, peeling lettering rather than as letters. Measured as the share of glyph area
+too narrow to hold a single extrusion:
+
+| Label | Before | After |
+|---|---|---|
+| *Player Tokens* → *Player* / *Tokens* | 17.0 % (median stroke 0.276 mm) | 1.0 % (0.494 mm) |
+| *Development Cards* | 5.0 % (0.396 mm) | 0.2 % (0.537 mm) |
+
+Raising the **font weight** is the wrong lever — re-baking at the maximum weight 800 only moves
+*Development Cards* from 5.0 % to 1.1 %, because a high-contrast face thickens its stems far
+more than its hairlines. Scaling the text up fixes it, and keeps the letterforms.
+
+Three knobs matter, all set per lid in `BOX_LID`:
+
+| Key | Default | Here | Why |
+|---|---|---|---|
+| `LID_STRIPE_WIDTH` | 0.5 | **1.2** | The plaque's 45° stripes bridge ~24 mm of open air at half the lid's 1 mm thickness. At 0.5 mm that is a single unsupported extrusion, and it snaps. 1.2 mm is three lines abreast. |
+| `LID_STRIPE_SPACE` | 1.0 | **0.8** | Gap between stripes. Must stay above 0 — at exactly 0 the library draws no stripes at all. |
+| `LID_LABELS_BORDER_THICKNESS` | 0.3 | **0.5** | Width of the plaque's border ring, which stands alone on the first layers. The 0.3 default is below one extrusion. |
+
+`LID_LABELS_BG_THICKNESS` (default 2.0) sets the plaque margin, but note that the frame grows by
+**twice** that per side: `MakeLidLabelFrame` offsets the text once inside its bounding hull and
+again outside it. On the two 26 mm-deep lids the default therefore buries the plaque border in
+the lid wall, so they use 1.0.
 
 ### Which way up
 
@@ -104,8 +137,18 @@ BIT mirrors lid labels — `MakeLidLabel` applies `MirrorAboutPoint([1,0,0])`, i
 v2 and v4 — because the lid is emitted flipped relative to how it sits on the box. The label is
 extruded through the full lid thickness, so it is legible from either face, but reads the right
 way round from only one. Viewed from +Z in the exported STL it appears mirrored; seat the lid
-with the readable face up. The lid's profile is symmetric in Z (a full-width flange at both
-faces with an inset body between), so neither orientation affects the print.
+with the readable face up.
+
+**Print the lid exactly as exported — do not flip it.** The lid is a shallow tray: the
+perforated deck occupies z 0–1 mm and a 4 mm perimeter wall rises above it. Turned over, that
+deck would have to bridge the full opening 4 mm in the air.
+
+That orientation puts the readable face against the bed, which is also where the lettering
+stands proud: the plaque's stripes occupy only the upper half of the deck (z 0.5–1.0, a
+hardcoded `depth_ratio` of 0.5) while the glyphs run through its full thickness, so the letters
+sit 0.5 mm above the stripes on the bed side and finish flush with them on top. The first two
+layers of the plaque are therefore the letters alone, printed as free-standing islands — which
+is why their stroke width has to clear one extrusion (see below).
 
 ### About the font
 
